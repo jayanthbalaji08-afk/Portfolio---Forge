@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="STM32G0 chip">
+  <defs>
+    <linearGradient id="chipBody" x1="160" y1="160" x2="352" y2="352" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#15171b"/>
+      <stop offset="1" stop-color="#050608"/>
+    </linearGradient>
+    <linearGradient id="pinBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d7d1ca"/>
+      <stop offset="1" stop-color="#8f8680"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".18"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="#ffffff"/>
+
+  <g filter="url(#shadow)">
+    <rect x="150" y="150" width="212" height="212" rx="20" fill="url(#chipBody)"/>
+    <rect x="168" y="168" width="176" height="176" rx="14" fill="none" stroke="#2c2f35" stroke-width="2"/>
+  </g>
+
+  <g fill="url(#pinBody)" stroke="#6f6761" stroke-width="1">
+    <rect x="168" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="184" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="200" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="216" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="232" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="248" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="264" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="280" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="296" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="312" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="328" y="128" width="7" height="20" rx="1.5"/>
+    <rect x="344" y="128" width="7" height="20" rx="1.5"/>
+
+    <rect x="168" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="184" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="200" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="216" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="232" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="248" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="264" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="280" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="296" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="312" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="328" y="364" width="7" height="20" rx="1.5"/>
+    <rect x="344" y="364" width="7" height="20" rx="1.5"/>
+
+    <rect x="128" y="168" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="184" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="200" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="216" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="232" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="248" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="264" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="280" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="296" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="312" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="328" width="20" height="7" rx="1.5"/>
+    <rect x="128" y="344" width="20" height="7" rx="1.5"/>
+
+    <rect x="364" y="168" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="184" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="200" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="216" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="232" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="248" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="264" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="280" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="296" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="312" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="328" width="20" height="7" rx="1.5"/>
+    <rect x="364" y="344" width="20" height="7" rx="1.5"/>
+  </g>
+
+  <g fill="#ffffff" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">
+    <text x="256" y="238" font-size="66" font-weight="800" font-style="italic" letter-spacing="1">ST</text>
+    <text x="256" y="282" font-size="32" font-weight="700" letter-spacing="2">STM32G0</text>
+  </g>
+</svg>

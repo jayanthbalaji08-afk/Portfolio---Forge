@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-label="Flight controller PCB illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dfe5ec"/>
+      <stop offset="1" stop-color="#aeb7c4"/>
+    </linearGradient>
+    <linearGradient id="board" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1d232d"/>
+      <stop offset="1" stop-color="#090b10"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4e5a8"/>
+      <stop offset="1" stop-color="#d2c57c"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#111" flood-opacity=".35"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <path d="M220 210L835 120L1005 535L395 625L220 210Z" fill="url(#board)" stroke="#2a2f3a" stroke-width="4"/>
+    <path d="M255 232L814 150L970 520L418 598L255 232Z" fill="none" stroke="#f0c26a" stroke-width="5" stroke-dasharray="8 14" opacity=".85"/>
+  </g>
+
+  <g fill="url(#gold)" stroke="#c1b06b" stroke-width="4">
+    <rect x="255" y="244" width="94" height="58" rx="8"/>
+    <rect x="165" y="305" width="112" height="58" rx="8"/>
+    <rect x="205" y="438" width="118" height="60" rx="8"/>
+    <rect x="360" y="528" width="116" height="56" rx="8"/>
+    <rect x="790" y="445" width="120" height="60" rx="8"/>
+    <rect x="905" y="328" width="104" height="56" rx="8"/>
+    <rect x="840" y="220" width="102" height="56" rx="8"/>
+    <rect x="580" y="560" width="120" height="56" rx="8"/>
+    <rect x="178" y="407" width="88" height="44" rx="6"/>
+  </g>
+
+  <g fill="#dfe5ec" opacity=".9">
+    <rect x="512" y="260" width="248" height="248" rx="10" transform="rotate(-12 636 384)"/>
+    <rect x="547" y="292" width="178" height="178" rx="8" transform="rotate(-12 636 384)" fill="#12151b"/>
+  </g>
+  <g fill="#0f1218" stroke="#3b7cf6" stroke-opacity=".45" stroke-width="3">
+    <rect x="527" y="275" width="220" height="220" rx="12" transform="rotate(-12 637 385)"/>
+    <rect x="558" y="306" width="158" height="158" rx="10" transform="rotate(-12 637 385)" fill="#0a0d12"/>
+  </g>
+
+  <g fill="#1a1f28" stroke="#343b48" stroke-width="3">
+    <rect x="432" y="230" width="56" height="56" rx="8"/>
+    <rect x="705" y="225" width="58" height="58" rx="8"/>
+    <rect x="455" y="460" width="64" height="64" rx="8"/>
+    <rect x="748" y="470" width="66" height="66" rx="8"/>
+  </g>
+
+  <g stroke="#2dd4ee" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".95">
+    <path d="M340 204L525 357"/>
+    <path d="M392 178L603 363"/>
+    <path d="M455 160L679 370"/>
+    <path d="M820 166L683 370"/>
+    <path d="M920 252L694 380"/>
+    <path d="M956 364L702 394"/>
+    <path d="M922 525L700 404"/>
+    <path d="M742 570L688 413"/>
+    <path d="M512 574L640 412"/>
+    <path d="M347 525L610 402"/>
+  </g>
+
+  <g fill="#f6f7f8" opacity=".95" font-family="Inter, Arial, sans-serif" font-weight="700">
+    <text x="435" y="205" font-size="34">FC</text>
+    <text x="480" y="205" font-size="18">STM32H7</text>
+    <text x="670" y="565" font-size="18">FLIGHT CONTROLLER</text>
+    <text x="300" y="575" font-size="16">POWER</text>
+    <text x="872" y="190" font-size="16">GPS</text>
+    <text x="900" y="560" font-size="16">MOTORS</text>
+  </g>
+
+  <g fill="#2dd4ee" opacity=".9">
+    <circle cx="610" cy="360" r="18"/>
+    <circle cx="700" cy="330" r="10"/>
+    <circle cx="585" cy="430" r="10"/>
+    <circle cx="720" cy="430" r="10"/>
+    <circle cx="630" cy="470" r="10"/>
+  </g>
+
+  <g fill="none" stroke="#f0c26a" stroke-width="5" stroke-linecap="round">
+    <path d="M290 245h76"/>
+    <path d="M152 336h84"/>
+    <path d="M214 467h72"/>
+    <path d="M388 588h96"/>
+    <path d="M792 510h110"/>
+    <path d="M898 356h84"/>
+    <path d="M868 246h78"/>
+    <path d="M586 598h120"/>
+  </g>
+</svg>
