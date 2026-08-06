@@ -443,15 +443,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display:none; align-items:center; justify-content:center; z-index:200; padding:24px;
 }
 .modal-overlay.open{ display:flex; }
+.modal-overlay.fullscreen{
+  padding:0;
+  align-items:stretch;
+  justify-content:stretch;
+}
 .modal-box{
   background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:36px;
   max-width:640px; width:100%; max-height:82vh; overflow-y:auto; position:relative;
   box-shadow:0 40px 90px -30px rgba(0,0,0,.6);
 }
+.modal-overlay.fullscreen .modal-box{
+  max-width:none;
+  max-height:none;
+  width:100%;
+  height:100%;
+  border-radius:0;
+  border:none;
+  box-shadow:none;
+  padding:clamp(24px,4vw,48px);
+}
 .modal-close{
   position:absolute; top:18px; right:18px; width:34px;height:34px; border-radius:8px; border:1px solid var(--line);
   background:transparent; color:var(--text-dim); cursor:pointer; display:flex; align-items:center; justify-content:center;
   font-size:16px; transition:all .2s var(--ease);
+}
+.modal-overlay.fullscreen .modal-close{
+  top:clamp(16px,2.5vw,24px);
+  right:clamp(16px,2.5vw,24px);
 }
 .modal-close:hover{ color:var(--cyan); border-color:var(--cyan); }
 .modal-eyebrow{ font-family:var(--font-mono); font-size:12px; color:var(--cyan); letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px; }
@@ -459,6 +478,36 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .modal-box .tag{ margin-right:4px; }
 .modal-list{ margin:16px 0 0; padding-left:20px; color:var(--text-dim); font-size:14.5px; }
 .modal-list li{ margin-bottom:6px; }
+.modal-subhead{ font-family:var(--font-mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--cyan); margin:22px 0 10px; }
+.photo-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin:18px 0 10px; }
+.photo-card{
+  padding:0; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface-2);
+  cursor:pointer; text-align:left; transition:transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.photo-card:hover{ transform:translateY(-4px); border-color:var(--cyan-dim); box-shadow:0 18px 30px -20px rgba(0,0,0,.55); }
+.photo-card:focus-visible{ outline:2px solid var(--cyan); outline-offset:3px; }
+.photo-card img{ width:100%; height:180px; object-fit:cover; display:block; background:#06090d; }
+.photo-card-label{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:4px; }
+.photo-card-label strong{ font-family:var(--font-display); font-size:15px; color:var(--text); }
+.photo-card-label span{ font-family:var(--font-mono); font-size:11.5px; color:var(--cyan-dim); letter-spacing:.05em; text-transform:uppercase; }
+.photo-note{ margin:8px 0 0; font-family:var(--font-mono); font-size:12px; color:var(--text-faint); }
+.photo-viewer{
+  position:fixed; inset:0; background:rgba(4,6,10,.88); backdrop-filter:blur(4px);
+  display:none; align-items:center; justify-content:center; z-index:210; padding:24px;
+}
+.photo-viewer.open{ display:flex; }
+.photo-viewer-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:30px;
+  max-width:min(1100px,96vw); width:100%; max-height:92vh; overflow:auto; position:relative;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.65);
+}
+.photo-viewer-eyebrow{ font-family:var(--font-mono); font-size:12px; color:var(--cyan); letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px; }
+.photo-viewer-card h2{ font-size:22px; margin-bottom:14px; padding-right:30px; }
+.photo-viewer-card img{
+  width:100%; max-height:72vh; object-fit:contain; display:block; border-radius:12px;
+  background:#06090d; border:1px solid var(--line);
+}
+.photo-viewer-caption{ margin-top:14px; font-size:13px; color:var(--text-dim); }
 
 /* ---------- Contact ---------- */
 .contact-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:50px; }
@@ -955,8 +1004,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       </div>
       <div class="card week-card reveal" data-week="1">
         <div class="week-tag">Week 1</div>
-        <h3>Personality Test &amp; Zen Pencils</h3>
-        <p class="skill-desc">16 Personality Test result and a Zen Pencils reflection exercise.</p>
+        <h3>5S Workplace Organization &amp; Portfolio Website</h3>
+        <p class="skill-desc">Mic/sensor sorting and a personal portfolio website build.</p>
         <div class="week-hint">Click to open →</div>
       </div>
       <div class="card week-card reveal" data-week="2">
@@ -1187,12 +1236,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 <!-- Shared modal for Project details & Protosem weekly logs -->
 <div class="modal-overlay" id="modal-overlay">
-  <div class="modal-box">
+  <div class="modal-box" id="modal-box">
     <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
     <div class="modal-eyebrow" id="modal-eyebrow">Detail</div>
     <h2 id="modal-title">Title</h2>
     <div id="modal-tags" class="proj-tags" style="margin-bottom:10px;"></div>
     <div id="modal-body"></div>
+  </div>
+</div>
+
+<div class="photo-viewer" id="photo-viewer" aria-hidden="true">
+  <div class="photo-viewer-card" role="dialog" aria-modal="true" aria-label="Photo preview">
+    <button class="modal-close" id="photo-viewer-close" aria-label="Close photo preview">X</button>
+    <div class="photo-viewer-eyebrow" id="photo-viewer-eyebrow">Photo Space</div>
+    <h2 id="photo-viewer-title">Photo Space</h2>
+    <img id="photo-viewer-image" alt="Photo preview">
+    <div class="photo-viewer-caption" id="photo-viewer-caption"></div>
   </div>
 </div>
 
@@ -1355,19 +1414,76 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalTags = document.getElementById('modal-tags');
   const modalBody = document.getElementById('modal-body');
   const modalCloseBtn = document.getElementById('modal-close');
+  const modalBox = document.getElementById('modal-box');
+  const photoOverlay = document.getElementById('photo-viewer');
+  const photoOverlayEyebrow = document.getElementById('photo-viewer-eyebrow');
+  const photoOverlayTitle = document.getElementById('photo-viewer-title');
+  const photoOverlayImage = document.getElementById('photo-viewer-image');
+  const photoOverlayCaption = document.getElementById('photo-viewer-caption');
+  const photoOverlayCloseBtn = document.getElementById('photo-viewer-close');
 
-  function openModal({eyebrow, title, tags, bodyHTML}){
+  function syncBodyLock(){
+    document.body.style.overflow = (overlay.classList.contains('open') || photoOverlay.classList.contains('open')) ? 'hidden' : '';
+  }
+
+  function openModal({eyebrow, title, tags, bodyHTML, fullscreen = false}){
     modalEyebrow.textContent = eyebrow || 'Detail';
     modalTitle.textContent = title || '';
     modalTags.innerHTML = (tags || []).map(t => `<span class="tag">${t}</span>`).join('');
     modalBody.innerHTML = bodyHTML || '';
+    modalBox.classList.toggle('fullscreen', !!fullscreen);
+    overlay.classList.toggle('fullscreen', !!fullscreen);
     overlay.classList.add('open');
+    syncBodyLock();
   }
-  function closeModal(){ overlay.classList.remove('open'); }
+  function closeModal(){
+    overlay.classList.remove('open');
+    overlay.classList.remove('fullscreen');
+    modalBox.classList.remove('fullscreen');
+    syncBodyLock();
+  }
+
+  function openPhotoViewer({src, alt, caption}){
+    photoOverlayEyebrow.textContent = 'Photo Space';
+    photoOverlayTitle.textContent = alt || 'Photo preview';
+    photoOverlayImage.src = src;
+    photoOverlayImage.alt = alt || 'Photo preview';
+    photoOverlayCaption.textContent = caption || '';
+    photoOverlay.classList.add('open');
+    syncBodyLock();
+  }
+
+  function closePhotoViewer(){
+    photoOverlay.classList.remove('open');
+    photoOverlayImage.removeAttribute('src');
+    photoOverlayImage.alt = 'Photo preview';
+    syncBodyLock();
+  }
 
   modalCloseBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  photoOverlayCloseBtn.addEventListener('click', closePhotoViewer);
+  photoOverlay.addEventListener('click', (e) => { if (e.target === photoOverlay) closePhotoViewer(); });
+  modalBody.addEventListener('click', (e) => {
+    const photo = e.target.closest('[data-fullscreen-src]');
+    if (!photo) return;
+    const src = photo.getAttribute('data-fullscreen-src');
+    if (!src) return;
+    e.preventDefault();
+    openPhotoViewer({
+      src,
+      alt: photo.getAttribute('data-fullscreen-alt') || 'Photo preview',
+      caption: photo.getAttribute('data-fullscreen-caption') || ''
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (photoOverlay.classList.contains('open')) {
+      closePhotoViewer();
+      return;
+    }
+    closeModal();
+  });
 
   const projectData = {
     pid: {
@@ -1564,6 +1680,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  function makeProtosemPhotoPlaceholder(label){
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#111a24"/>
+            <stop offset="100%" stop-color="#16212d"/>
+          </linearGradient>
+        </defs>
+        <rect width="1600" height="1000" fill="#080b10"/>
+        <rect x="36" y="36" width="1528" height="928" rx="28" fill="url(#g)" stroke="#1f2c3a" stroke-width="4" stroke-dasharray="18 16"/>
+        <text x="800" y="470" text-anchor="middle" fill="#2dd4ee" font-family="Space Grotesk, Arial, sans-serif" font-size="74" font-weight="700" letter-spacing="4">PHOTO SPACE</text>
+        <text x="800" y="545" text-anchor="middle" fill="#90a4b8" font-family="JetBrains Mono, Consolas, monospace" font-size="28" letter-spacing="3">${label || 'CLICK TO VIEW FULL SCREEN'}</text>
+      </svg>
+    `;
+    return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+  }
+
+  const protosemPhotoPlaceholder = makeProtosemPhotoPlaceholder('CLICK TO VIEW FULL SCREEN');
+
   const weekData = {
     0: {
       eyebrow: 'Protosem',
@@ -1588,11 +1724,50 @@ document.addEventListener('DOMContentLoaded', () => {
       eyebrow: 'Protosem',
       title: 'Week 2 — 5S Workplace Organization',
       tags: ['5S','microcontroller & Sensor Team'],
+      fullscreen: true,
       body: `<p>As part of the FORGE ProtoSem program, we participated in a hands-on 5S Workplace Organization Activity to understand the importance of maintaining a clean, organized, and efficient workspace. The 5S methodology, developed in Japan, is widely used in manufacturing industries, engineering laboratories, and research organizations to improve productivity, reduce waste, and ensure workplace safety. The five principles of 5S are Sort (Seiri), Set in Order (Seiton), Shine (Seiso), Standardize (Seiketsu), and Sustain (Shitsuke). These principles encourage systematic organization and disciplined work practices.</p>
         <p>The activity involved organizing different categories of electronic components and tools into dedicated teams. I was assigned to the MIC and Sensor Team, where I worked with my teammates to arrange and organize various microphones and electronic sensors. Our responsibilities included identifying different sensor modules, separating components based on their function and type, checking for damaged or unused components, labeling storage containers, and arranging the components in an orderly manner for easy identification and retrieval. We ensured that frequently used components were placed in easily accessible locations while maintaining proper organization and cleanliness of the workspace.</p>
         <p>This activity demonstrated how proper organization can significantly reduce the time required to locate components during hardware development. By maintaining a systematic arrangement of microphones and sensors, engineers can improve workflow efficiency, minimize errors, prevent component damage, and simplify inventory management. We also learned the importance of returning every component to its designated location after use, which helps maintain consistency and reduces confusion among team members.</p>
         <p>Working as part of the microcontroller and Sensor Team enhanced my teamwork, communication, and organizational skills. It taught me that successful engineering projects depend not only on technical knowledge but also on disciplined workplace management. The 5S methodology can be effectively applied in electronics laboratories, PCB assembly, embedded systems development, robotics projects, and manufacturing environments to improve productivity and maintain professional standards.</p>
         <p>Overall, the 5S activity was a valuable learning experience that emphasized the importance of organization, cleanliness, and continuous improvement. It reinforced the idea that a well-maintained workspace leads to better efficiency, safer working conditions, and higher-quality engineering outcomes.</p>`
+    },
+    1: {
+      eyebrow: 'Protosem',
+      title: 'Week 1 - 5S Workplace Organization & Portfolio Website',
+      tags: ['5S','Portfolio Website','ProtoSem'],
+      fullscreen: true,
+      body: `<p>As part of the FORGE ProtoSem program, I worked on two activities that helped me improve both workplace organization and my technical presentation skills.</p>
+        <h4 class="modal-subhead">Activity 1 - 5S Workplace Organization</h4>
+        <p>I participated in a 5S organization activity focused on microphones and electronic sensors. The goal was to sort, clean, arrange, and store components properly so the workspace stayed efficient and easy to use.</p>
+        <ul class="modal-list">
+          <li>Identified and sorted different microphones and electronic sensors based on their type and application.</li>
+          <li>Separated usable components from unnecessary or damaged items to keep the workspace organized.</li>
+          <li>Arranged microphones and sensors systematically in their designated storage locations for easy identification and access.</li>
+          <li>Organized the components neatly so that they could be quickly retrieved during future projects and laboratory activities.</li>
+          <li>Cleaned the work area and ensured that all components were properly placed after completion of the activity.</li>
+          <li>Followed a standard arrangement method to maintain consistency in organizing the electronic components.</li>
+          <li>Returned all microphones and sensors to their assigned locations after handling them.</li>
+          <li>Worked collaboratively with team members to complete the organization process efficiently while following the 5S principles of workplace management.</li>
+          <li>Learned the importance of workplace organization, discipline, and proper component management in improving productivity and reducing time during electronics projects.</li>
+        </ul>
+        <div class="photo-grid">
+          <button class="photo-card" type="button" data-fullscreen-src="${protosemPhotoPlaceholder}" data-fullscreen-alt="5S Workplace Organization Activity" data-fullscreen-caption="Photo space for the 5S workplace organization activity.">
+            <img src="${protosemPhotoPlaceholder}" alt="5S Workplace Organization Activity">
+            <div class="photo-card-label"><strong>Photo Space</strong><span>5S Workplace Organization</span></div>
+          </button>
+        </div>
+        <p class="photo-note">Click the photo space to view it in full screen.</p>
+        <h4 class="modal-subhead">Activity 2 - Making Portfolio Website</h4>
+        <p>As part of the FORGE ProtoSem program, I developed my own professional portfolio website to showcase my technical skills, projects, achievements, certifications, and career objectives. During this process, I learned how to organize information effectively, create a clean and user-friendly interface, and present my work in a professional manner.</p>
+        <p>I included projects related to embedded systems, PCB design, robotics, UI/UX design, and my ongoing flight controller development project. This activity improved my web development skills using HTML, CSS, and JavaScript while helping me build a strong online professional presence.</p>
+        <p>Creating the portfolio also enhanced my creativity, design thinking, and confidence in presenting my technical abilities to recruiters, industry professionals, and potential employers.</p>
+        <div class="photo-grid">
+          <button class="photo-card" type="button" data-fullscreen-src="${protosemPhotoPlaceholder}" data-fullscreen-alt="Portfolio Website Activity" data-fullscreen-caption="Photo space for the portfolio website activity.">
+            <img src="${protosemPhotoPlaceholder}" alt="Portfolio Website Activity">
+            <div class="photo-card-label"><strong>Photo Space</strong><span>Portfolio Website</span></div>
+          </button>
+        </div>
+        <p class="photo-note">Click the photo space to view it in full screen.</p>`
     }
   };
 
@@ -1605,12 +1780,77 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
+  weekData[2] = {
+    eyebrow: 'Protosem',
+    title: 'Week 2 - Learning Activities',
+    tags: ['Simple Thinking','Scratch','Python','App Inventor'],
+    fullscreen: true,
+    body: `<p>Week 2 focused on building a stronger foundation in logical thinking, coding, and app development through five different activities.</p>
+      <h4 class="modal-subhead">Activity 1 - Orientation Session on Simple Thinking</h4>
+      <p>The second week began with an orientation session based on the book <em>Simple Thinking</em>. The session introduced the importance of developing a problem-solving mindset by simplifying complex problems into smaller and manageable tasks. We learned that innovation begins with understanding the root cause of a problem and approaching it with logical and creative thinking. The session also emphasized observation, critical thinking, and continuous learning as essential qualities for engineers and innovators.</p>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 1')}" data-fullscreen-alt="Orientation Session on Simple Thinking" data-fullscreen-caption="Photo space for the Simple Thinking orientation session.">
+          <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 1')}" alt="Orientation Session on Simple Thinking">
+          <div class="photo-card-label"><strong>Photo Space</strong><span>Simple Thinking</span></div>
+        </button>
+      </div>
+      <p class="photo-note">Click the photo space to view it in full screen.</p>
+
+      <h4 class="modal-subhead">Activity 2 - Algorithms and Flowcharts - Think Like a Coder</h4>
+      <p>The second activity focused on learning the fundamentals of algorithms and flowcharts through the <em>Think Like a Coder</em> video. We understood how algorithms provide step-by-step instructions to solve a problem and how flowcharts visually represent the sequence of operations using standard symbols. This activity helped us improve our logical thinking and understand the importance of planning a solution before writing any program.</p>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 2')}" data-fullscreen-alt="Algorithms and Flowcharts Activity" data-fullscreen-caption="Photo space for the algorithms and flowcharts activity.">
+          <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 2')}" alt="Algorithms and Flowcharts Activity">
+          <div class="photo-card-label"><strong>Photo Space</strong><span>Algorithms &amp; Flowcharts</span></div>
+        </button>
+      </div>
+      <p class="photo-note">Click the photo space to view it in full screen.</p>
+
+      <h4 class="modal-subhead">Activity 3 - Game Development using Scratch</h4>
+      <p>The third activity involved creating a simple interactive game using Scratch, a block-based visual programming platform. We learned how to use sprites, backgrounds, events, loops, conditions, variables, and sound effects to develop a game. This activity introduced us to basic programming concepts in an engaging way and improved our logical thinking, creativity, and problem-solving skills.</p>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 3')}" data-fullscreen-alt="Scratch Game Development Activity" data-fullscreen-caption="Photo space for the Scratch game development activity.">
+          <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 3')}" alt="Scratch Game Development Activity">
+          <div class="photo-card-label"><strong>Photo Space</strong><span>Scratch Game</span></div>
+        </button>
+      </div>
+      <p class="photo-note">Click the photo space to view it in full screen.</p>
+
+      <h4 class="modal-subhead">Activity 4 - Introduction to Python Programming</h4>
+      <p>The fourth activity introduced us to the basics of Python programming. We learned fundamental concepts such as variables, data types, operators, input and output statements, conditional statements, loops, and functions. Practical coding exercises helped us understand the syntax and structure of Python, providing a strong foundation for future programming and software development.</p>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 4')}" data-fullscreen-alt="Python Programming Activity" data-fullscreen-caption="Photo space for the Python programming activity.">
+          <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 4')}" alt="Python Programming Activity">
+          <div class="photo-card-label"><strong>Photo Space</strong><span>Python Basics</span></div>
+        </button>
+      </div>
+      <p class="photo-note">Click the photo space to view it in full screen.</p>
+
+      <h4 class="modal-subhead">Activity 5 - Mobile App Development using MIT App Inventor</h4>
+      <p>The final activity involved designing and developing a mobile application using MIT App Inventor. Based on a given problem statement, we designed the user interface and implemented the required functionality using block-based programming. This activity helped us understand the basics of mobile application development, user interface design, logical programming, and problem-solving. It also demonstrated how simple applications can be developed rapidly without extensive coding knowledge.</p>
+      <div class="photo-grid">
+        <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 5')}" data-fullscreen-alt="MIT App Inventor Activity" data-fullscreen-caption="Photo space for the MIT App Inventor mobile app activity.">
+          <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 5')}" alt="MIT App Inventor Activity">
+          <div class="photo-card-label"><strong>Photo Space</strong><span>MIT App Inventor</span></div>
+        </button>
+      </div>
+      <p class="photo-note">Click the photo space to view it in full screen.</p>`
+  };
+
+  const week2Card = document.querySelector('.week-card[data-week="2"]');
+  if (week2Card) {
+    const week2Title = week2Card.querySelector('h3');
+    const week2Desc = week2Card.querySelector('.skill-desc');
+    if (week2Title) week2Title.textContent = 'Week 2 Activities';
+    if (week2Desc) week2Desc.textContent = 'Simple Thinking, flowcharts, Scratch, Python, and MIT App Inventor.';
+  }
+
   document.querySelectorAll('.week-card').forEach(card => {
     card.addEventListener('click', () => {
       const key = card.getAttribute('data-week');
       const data = weekData[key];
       if (!data) return;
-      openModal({eyebrow: data.eyebrow, title: data.title, tags: data.tags, bodyHTML: data.body});
+      openModal({eyebrow: data.eyebrow, title: data.title, tags: data.tags, bodyHTML: data.body, fullscreen: !!data.fullscreen});
     });
   });
 
