@@ -999,7 +999,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
       <div class="card week-card reveal" data-week="0">
         <div class="week-tag">Week 0</div>
         <h3>Week 0 Activities</h3>
-        <p class="skill-desc">Introduction to FORGE, 16 Personality Test, Zen Pencils, and LinkedIn profile setup.</p>
+        <p class="skill-desc">Introduction to FORGE, personality testing, Zen Pencils, LinkedIn setup, and a tall structure challenge.</p>
         <div class="week-hint">Click to open →</div>
       </div>
       <div class="card week-card reveal" data-week="1">
@@ -1699,18 +1699,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const protosemPhotoPlaceholder = makeProtosemPhotoPlaceholder('CLICK TO VIEW FULL SCREEN');
+  const fiveSPhotoSrc = 'Images/DSC_8697.JPG';
+  const forgeIntroPhotoSrc = 'Images/DSC_8627.JPG';
+  const personalityPhotoSrc = 'Images/DSC_8513.JPG';
+  const zenPencilsPhotoSrc = 'Images/DSC_8518.JPG';
+  const linkedinPhotoSrc = 'Images/DSC_8465.JPG';
+  const tallStructurePhotoSrc = 'Images/DSC_8624.JPG';
 
   const weekData = {
     0: {
       eyebrow: 'Protosem',
       title: 'Week 0 Activities',
-      tags: ['FORGE','16 Personality Test','Zen Pencils','LinkedIn'],
+      tags: ['FORGE','16 Personality Test','Zen Pencils','LinkedIn','Tall Structure'],
       fullscreen: true,
       body: `<h4 class="modal-subhead">Activity 1: Introduction to FORGE</h4>
         <p>The first activity of the ProtoSem program was an introductory session about FORGE Innovation &amp; Ventures. The session provided an overview of FORGE's vision, mission, and its role in promoting innovation, entrepreneurship, and product development among students. We were introduced to the various facilities, learning opportunities, workshops, hackathons, and incubation programs offered by FORGE. The session emphasized design thinking, problem-solving, and transforming innovative ideas into practical solutions that create real-world impact.</p>
         <div class="photo-grid">
-          <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 1')}" data-fullscreen-alt="Introduction to FORGE" data-fullscreen-caption="Photo space for Activity 1: Introduction to FORGE.">
-            <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 1')}" alt="Introduction to FORGE">
+          <button class="photo-card" type="button" data-fullscreen-src="${forgeIntroPhotoSrc}" data-fullscreen-alt="Introduction to FORGE" data-fullscreen-caption="Photo space for Activity 1: Introduction to FORGE.">
+            <img src="${forgeIntroPhotoSrc}" alt="Introduction to FORGE">
             <div class="photo-card-label"><strong>Photo Space</strong><span>Introduction to FORGE</span></div>
           </button>
         </div>
@@ -1719,8 +1725,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <h4 class="modal-subhead">Activity 2: 16 Personality Test</h4>
         <p>The second activity involved completing the 16 Personality Test, based on the Myers-Briggs Type Indicator (MBTI) framework. The assessment helped us understand our personality traits, strengths, communication style, and working preferences. My personality type was identified as <strong>Logician (INTP)</strong>, which reflects analytical thinking, creativity, curiosity, and problem-solving abilities. The activity encouraged self-awareness and helped me identify areas for personal and professional growth while improving my understanding of teamwork and leadership.</p>
         <div class="photo-grid">
-          <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 2')}" data-fullscreen-alt="16 Personality Test" data-fullscreen-caption="Photo space for Activity 2: 16 Personality Test.">
-            <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 2')}" alt="16 Personality Test">
+          <button class="photo-card" type="button" data-fullscreen-src="${personalityPhotoSrc}" data-fullscreen-alt="16 Personality Test" data-fullscreen-caption="Photo space for Activity 2: 16 Personality Test.">
+            <img src="${personalityPhotoSrc}" alt="16 Personality Test">
             <div class="photo-card-label"><strong>Photo Space</strong><span>16 Personality Test</span></div>
           </button>
         </div>
@@ -1729,19 +1735,29 @@ document.addEventListener('DOMContentLoaded', () => {
         <h4 class="modal-subhead">Activity 3: Zen Pencils Reflection</h4>
         <p>The third activity was the Zen Pencils reflection exercise, where we explored motivational comics inspired by the experiences and quotes of successful personalities. I selected the story "Great People Do Things Before They Know They Are Ready." The story conveyed the importance of taking initiative, accepting challenges, and learning through experience instead of waiting for the perfect moment. This activity inspired me to confidently work on challenging engineering projects and reinforced the value of continuous learning and self-improvement.</p>
         <div class="photo-grid">
-          <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 3')}" data-fullscreen-alt="Zen Pencils Reflection" data-fullscreen-caption="Photo space for Activity 3: Zen Pencils reflection.">
-            <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 3')}" alt="Zen Pencils Reflection">
+          <button class="photo-card" type="button" data-fullscreen-src="${zenPencilsPhotoSrc}" data-fullscreen-alt="Zen Pencils Reflection" data-fullscreen-caption="Photo space for Activity 3: Zen Pencils reflection.">
+            <img src="${zenPencilsPhotoSrc}" alt="Zen Pencils Reflection">
             <div class="photo-card-label"><strong>Photo Space</strong><span>Zen Pencils Reflection</span></div>
           </button>
         </div>
         <p class="photo-note">Click the photo space to view it in full screen.</p>
 
         <h4 class="modal-subhead">Activity 4: LinkedIn Profile Setup</h4>
-        <p>The final activity of Week 0 focused on creating and developing a professional LinkedIn profile. We learned how to build a strong professional profile by adding educational details, technical skills, projects, certifications, achievements, and a professional summary. The session also highlighted the importance of networking with professionals, following companies, and using LinkedIn to explore internships, career opportunities, and industry updates. This activity helped us establish a professional online presence and prepare for future career development.</p>
+        <p>The fourth activity of Week 0 focused on creating and developing a professional LinkedIn profile. We learned how to build a strong professional profile by adding educational details, technical skills, projects, certifications, achievements, and a professional summary. The session also highlighted the importance of networking with professionals, following companies, and using LinkedIn to explore internships, career opportunities, and industry updates. This activity helped us establish a professional online presence and prepare for future career development.</p>
         <div class="photo-grid">
-          <button class="photo-card" type="button" data-fullscreen-src="${makeProtosemPhotoPlaceholder('ACTIVITY 4')}" data-fullscreen-alt="LinkedIn Profile Setup" data-fullscreen-caption="Photo space for Activity 4: LinkedIn profile setup.">
-            <img src="${makeProtosemPhotoPlaceholder('ACTIVITY 4')}" alt="LinkedIn Profile Setup">
+          <button class="photo-card" type="button" data-fullscreen-src="${linkedinPhotoSrc}" data-fullscreen-alt="LinkedIn Profile Setup" data-fullscreen-caption="Photo space for Activity 4: LinkedIn profile setup.">
+            <img src="${linkedinPhotoSrc}" alt="LinkedIn Profile Setup">
             <div class="photo-card-label"><strong>Photo Space</strong><span>LinkedIn Profile Setup</span></div>
+          </button>
+        </div>
+        <p class="photo-note">Click the photo space to view it in full screen.</p>
+
+        <h4 class="modal-subhead">Activity 5: Tall Structure Challenge</h4>
+        <p>The fifth activity was the Tall Structure Challenge, in which each team was provided with spaghetti sticks and marshmallows to construct the tallest free-standing structure within a limited time. The objective of the activity was to encourage creativity, teamwork, planning, and problem-solving while working under time constraints. Our team discussed different design ideas, tested various structural arrangements, and improved the stability of the model through trial and error. This activity demonstrated the importance of effective communication, collaboration, innovation, and structural design. It also taught us that successful engineering solutions require proper planning, experimentation, and continuous improvement to achieve the best results.</p>
+        <div class="photo-grid">
+          <button class="photo-card" type="button" data-fullscreen-src="${tallStructurePhotoSrc}" data-fullscreen-alt="Tall Structure Challenge" data-fullscreen-caption="Photo space for Activity 5: Tall Structure Challenge.">
+            <img src="${tallStructurePhotoSrc}" alt="Tall Structure Challenge">
+            <div class="photo-card-label"><strong>Photo Space</strong><span>Tall Structure Challenge</span></div>
           </button>
         </div>
         <p class="photo-note">Click the photo space to view it in full screen.</p>`
@@ -1787,8 +1803,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <li>Learned the importance of workplace organization, discipline, and proper component management in improving productivity and reducing time during electronics projects.</li>
         </ul>
         <div class="photo-grid">
-          <button class="photo-card" type="button" data-fullscreen-src="${protosemPhotoPlaceholder}" data-fullscreen-alt="5S Workplace Organization Activity" data-fullscreen-caption="Photo space for the 5S workplace organization activity.">
-            <img src="${protosemPhotoPlaceholder}" alt="5S Workplace Organization Activity">
+          <button class="photo-card" type="button" data-fullscreen-src="${fiveSPhotoSrc}" data-fullscreen-alt="5S Workplace Organization Activity" data-fullscreen-caption="Photo space for the 5S workplace organization activity.">
+            <img src="${fiveSPhotoSrc}" alt="5S Workplace Organization Activity">
             <div class="photo-card-label"><strong>Photo Space</strong><span>5S Workplace Organization</span></div>
           </button>
         </div>
