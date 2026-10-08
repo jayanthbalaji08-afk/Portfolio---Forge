@@ -481,6 +481,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .iot-wrap li::marker{ color:var(--cyan); }
 .modal-box.iot-mode > .modal-eyebrow, .modal-box.iot-mode > h2, .modal-box.iot-mode > #modal-tags{ max-width:1000px; margin-left:auto; margin-right:auto; }
 .modal-box.iot-mode > #modal-tags{ margin-bottom:22px !important; }
+.iot-section.iot-top{ margin:0; padding:0 0 56px; border-top:none; border-bottom:1px solid var(--line); }
 .iot-section{ margin-top:80px; padding-top:64px; border-top:1px solid var(--line); }
 .iot-main-card{
   max-width:820px; margin:0 auto; cursor:pointer; padding:34px 38px; display:flex; flex-direction:column; gap:14px;
@@ -1080,6 +1081,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     <div class="about-bio">Protosem</div>
   </header>
 
+  <section class="section container" style="padding-top:16px;padding-bottom:0;">
+    <!-- ===== IoT (separate block) ===== -->
+    <div class="iot-section iot-top" id="protosem-iot">
+      <div class="section-head">
+        <h2>IoT</h2>
+        <p>Hands-on Internet of Things work with the ESP32 — click the box to see all five tasks.</p>
+      </div>
+      <div class="card iot-main-card" id="iot-main-card" role="button" tabindex="0" aria-expanded="false" aria-controls="iot-task-panel">
+        <div class="week-tag">IoT Module · 5 Tasks</div>
+        <h3>IoT — ESP32, MQTT, IFTTT &amp; Firebase</h3>
+        <p class="skill-desc">From switching an LED from a browser to a cloud-connected smart home: local web-server control, cloud control of a 220V bulb over MQTT, Google Assistant voice automation through IFTTT, a live Firebase monitoring dashboard, and sensor data logging with CSV export.</p>
+        <div class="iot-chips"><span>ESP32</span><span>Wi-Fi / HTTP</span><span>MQTT</span><span>Adafruit IO</span><span>IFTTT</span><span>Google Assistant</span><span>Firebase</span><span>DHT11</span><span>LDR</span><span>Relay</span></div>
+        <div class="week-hint">Click to view the 5 tasks <span class="iot-caret">⌄</span></div>
+      </div>
+      <div class="iot-task-panel" id="iot-task-panel" hidden>
+        <div class="iot-panel-title">Select a task to open the full write-up</div>
+        <div class="iot-task-grid"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section container" style="padding-top:16px;">
     <div class="section-head">
       <h2>Forge Program — Week by Week</h2>
@@ -1211,24 +1233,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
         <h3>Log coming soon</h3>
         <p class="skill-desc">This week's log is being written up and will be added here.</p>
         <div class="week-hint">Click to open →</div>
-      </div>
-    </div>
-    <!-- ===== IoT (separate block) ===== -->
-    <div class="iot-section" id="protosem-iot">
-      <div class="section-head">
-        <h2>IoT</h2>
-        <p>Hands-on Internet of Things work with the ESP32 — click the box to see all five tasks.</p>
-      </div>
-      <div class="card iot-main-card" id="iot-main-card" role="button" tabindex="0" aria-expanded="false" aria-controls="iot-task-panel">
-        <div class="week-tag">IoT Module · 5 Tasks</div>
-        <h3>IoT — ESP32, MQTT, IFTTT &amp; Firebase</h3>
-        <p class="skill-desc">From switching an LED from a browser to a cloud-connected smart home: local web-server control, cloud control of a 220V bulb over MQTT, Google Assistant voice automation through IFTTT, a live Firebase monitoring dashboard, and sensor data logging with CSV export.</p>
-        <div class="iot-chips"><span>ESP32</span><span>Wi-Fi / HTTP</span><span>MQTT</span><span>Adafruit IO</span><span>IFTTT</span><span>Google Assistant</span><span>Firebase</span><span>DHT11</span><span>LDR</span><span>Relay</span></div>
-        <div class="week-hint">Click to view the 5 tasks <span class="iot-caret">⌄</span></div>
-      </div>
-      <div class="iot-task-panel" id="iot-task-panel" hidden>
-        <div class="iot-panel-title">Select a task to open the full write-up</div>
-        <div class="iot-task-grid"></div>
       </div>
     </div>
     <div class="container scroll-hint" style="padding-left:0;padding-right:0; padding-top:10px;"><span class="chev">⌄</span> Keep scrolling <span class="chev">⌄</span></div>
