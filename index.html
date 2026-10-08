@@ -1396,8 +1396,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function routeFromHash(){
-    const id = (location.hash || '#home').replace('#','');
-    showPage(id);
+    const parts = (location.hash || '#home').replace('#','').split('/');
+    const id = parts[0] || 'home';
+    const active = document.querySelector('.page.active');
+    if (!(parts.length > 1 && active && active.id === 'page-' + id)) showPage(id);
   }
 
   window.addEventListener('hashchange', routeFromHash);
@@ -1551,6 +1553,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal(){
     modalBody.querySelectorAll('video').forEach(v => v.pause());
     modalBox.classList.remove('iot-mode');
+    if (/^#protosem\/iot\/task-/.test(location.hash)) history.replaceState(null, '', '#protosem/iot');
+    else if (/^#protosem\/week-/.test(location.hash)) history.replaceState(null, '', '#protosem');
     overlay.classList.remove('open');
     overlay.classList.remove('fullscreen');
     modalBox.classList.remove('fullscreen');
@@ -2924,16 +2928,57 @@ digitalWrite(RELAY_PIN, bulbOn ? HIGH : LOW);`)}`) +
     modalBox.scrollTop = 0;
   }
 
+  /* ---- Shareable links: #protosem/iot, #protosem/iot/task-1 … task-5, #protosem/week-N ---- */
   document.addEventListener('click', (e) => {
     const taskBtn = e.target.closest('[data-iot-task]');
-    if (taskBtn) { openIotTask(+taskBtn.getAttribute('data-iot-task')); return; }
-    if (e.target.closest('[data-iot-back]')) { closeModal(); toggleIotPanel(true); }
+    if (taskBtn) { location.hash = '#protosem/iot/task-' + (+taskBtn.getAttribute('data-iot-task') + 1); return; }
+    if (e.target.closest('[data-iot-back]')) { location.hash = '#protosem/iot'; }
   });
+  if (iotMain) iotMain.addEventListener('click', () => {
+    if (!iotPanel.hidden) { if (location.hash !== '#protosem/iot') history.pushState(null, '', '#protosem/iot'); }
+    else if (location.hash.indexOf('#protosem/iot') === 0) history.pushState(null, '', '#protosem');
+  });
+  document.querySelectorAll('.week-card[data-week]').forEach(card => {
+    card.addEventListener('click', () => {
+      const h = '#protosem/week-' + card.getAttribute('data-week');
+      if (location.hash !== h) history.pushState(null, '', h);
+    });
+  });
+
+  function applySubRoute(){
+    const parts = (location.hash || '').replace('#','').split('/');
+    if (parts[0] !== 'protosem') return;
+    const sub = parts[1] || '', leaf = parts[2] || '';
+    const taskMatch = /^task-(\d)$/.exec(leaf);
+    if (sub === 'iot' && taskMatch) {
+      const i = +taskMatch[1] - 1;
+      if (i >= 0 && i < iotTasks.length) {
+        if (iotPanel.hidden) { iotPanel.hidden = false; iotMain.classList.add('open'); iotMain.setAttribute('aria-expanded','true'); }
+        openIotTask(i);
+      }
+      return;
+    }
+    const weekMatch = /^week-(\d+)$/.exec(sub);
+    if (weekMatch) {
+      const card = document.querySelector('.week-card[data-week="' + weekMatch[1] + '"]');
+      if (card && !overlay.classList.contains('open')) card.click();
+      return;
+    }
+    if (overlay.classList.contains('open')) {
+      overlay.classList.remove('open'); overlay.classList.remove('fullscreen');
+      modalBox.classList.remove('fullscreen'); modalBox.classList.remove('iot-mode');
+      modalBody.querySelectorAll('video').forEach(v => v.pause());
+      syncBodyLock();
+    }
+    if (sub === 'iot') toggleIotPanel(true);
+  }
+  window.addEventListener('hashchange', applySubRoute);
+  applySubRoute();
 
   /* ===== Scroll-to-continue: reaching the bottom of a page auto-advances to the next ===== */
   let navLock = false;
   function goToNextPage(){
-    const current = (location.hash || '#home').replace('#','');
+    const current = (location.hash || '#home').replace('#','').split('/')[0];
     const idx = pageOrder.indexOf(current);
     if (idx === -1 || idx === pageOrder.length - 1) return;
     if (navLock) return;
